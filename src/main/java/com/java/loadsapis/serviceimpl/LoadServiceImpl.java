@@ -73,6 +73,7 @@ public class LoadServiceImpl implements LoadService{
 			   response.setData(loadEntity);
 			   return response;
 		   }
+		   return response;
 		  }
 		  List<LoadEntity> loadlist=loadRepository.findAll();
 		  if(!loadlist.isEmpty()) {
@@ -177,14 +178,14 @@ public class LoadServiceImpl implements LoadService{
 			 Optional<LoadEntity> loadEntity=loadRepository.findById(loadId);
 			 if(loadEntity.isPresent()) {
 				loadRepository.delete(loadEntity.get());
-				String message="Load details deleted successfully!";
+				String message="Success";
 				response.setMessage(message);
 				return response;
 			   }
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		 String message="Data doesn't exist!";
+		 String message="Failed";
 		 response.setMessage(message);
 		 return response;
 	}

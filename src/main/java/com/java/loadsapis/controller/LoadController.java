@@ -167,9 +167,13 @@ public class LoadController {
 	@DeleteMapping("/load/{loadId}")
 	public ResponseEntity<?> deleteLoadDetailsByLoadId(@PathVariable Long loadId){
 		ResponseDto response=loadService.deleteLoadDetailsByLoadId(loadId);
-		if(Objects.isNull(response.getData())) {
-			return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
+		if(response.getMessage().equals("Success")){
+			String message="Load details deleted successfully!";
+			response.setMessage(message);
+			return new ResponseEntity<>(response,HttpStatus.OK);
 		}
-		return new ResponseEntity<>(response,HttpStatus.OK);
+		String message="No data found!";
+		response.setMessage(message);
+		return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 	}
 }
